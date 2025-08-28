@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mrs. Passant — Teaching English (Pri.1–Pri.6)</title>
+    <meta name="description" content="Mrs. Passant — Professional English teacher for Primary 1 to Primary 6. Contact: 01009742002" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Subtle classroom pattern */
+      .pattern {
+        background-image: radial-gradient(currentColor 1px, transparent 1px);
+        background-size: 20px 20px;
+        opacity: 0.05;
+      }
+      .glass {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+    </style>
+  </head>
+  <body class="text-slate-800 bg-slate-50">
+    <!-- Header -->
+    <header class="relative">
+      <div class="absolute inset-0 pattern text-blue-800"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
+        <a id="brandTap" href="#" class="inline-flex items-center gap-3">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600 text-white font-bold shadow">EN</span>
+          <span class="font-semibold text-slate-900">Mrs. Passant</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+          <a href="#about" class="hover:text-blue-700">About</a>
+          <a href="#services" class="hover:text-blue-700">Services</a>
+          <a href="#levels" class="hover:text-blue-700">Levels</a>
+          <a href="#testimonials" class="hover:text-blue-700">Reviews</a>
+          <a href="#contact" class="hover:text-blue-700">Contact</a>
+          <a id="adminLink" href="admin.html" class="hidden hover:text-blue-700" title="Admin Dashboard">Admin</a>
+        </nav>
+        <a href="tel:01009742002" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white shadow hover:bg-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M1.5 4.5a3 3 0 013-3h1.372a2.25 2.25 0 012.12 1.474l1.036 2.76a2.25 2.25 0 01-.52 2.379L7.63 9.12a15.75 15.75 0 007.25 7.25l1.007-0.878a2.25 2.25 0 012.379-.52l2.76 1.036a2.25 2.25 0 011.474 2.12V19.5a3 3 0 01-3 3H18A16.5 16.5 0 011.5 6V4.5z"/></svg>
+          <span>01009742002</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-transparent"></div>
+      <div class="mx-auto max-w-7xl px-6 py-10 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+            Teaching English for <span class="text-blue-700">Primary 1–6</span>
+          </h1>
+          <p class="mt-4 text-lg text-slate-600">
+            Personalized, engaging English lessons designed to build strong reading, writing, and speaking skills for young learners.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="tel:01009742002" class="rounded-2xl bg-blue-600 text-white px-6 py-3 shadow hover:bg-blue-700">Call 01009742002</a>
+            <a href="#contact" class="rounded-2xl border border-blue-600 text-blue-700 px-6 py-3 hover:bg-blue-50">Book a Lesson</a>
+          </div>
+
+          <!-- Chalkboard card with contact -->
+          <div class="mt-8 rounded-2xl bg-slate-900 text-white p-6 shadow-xl relative">
+            <div class="absolute -top-3 -left-3 rotate-[-6deg] bg-emerald-400 text-emerald-900 px-3 py-1 rounded-lg text-xs font-semibold shadow">Board</div>
+            <p class="text-2xl font-bold tracking-wide">Mrs. Passant — Teaching English</p>
+            <p class="mt-1 text-slate-300">From Pri.1 to Pri.6</p>
+            <p class="mt-2"><span class="font-semibold">Contact:</span> 01009742002</p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <!-- Replace src with real photo of Mrs. Passant -->
+          <!-- TIP: Use a high-res, well-lit portrait. Keep ~4:5 ratio. -->
+          <img src="C:\Users\Marwan Khaled\Desktop\WhatsApp Image 2025-08-20 at 22.41.18_0a2e504c.jpg" />
+          <div class="absolute -bottom-3 -left-3 bg-white glass rounded-2xl shadow px-4 py-3 flex items-center gap-3">
+            <div class="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-700 flex items-center justify-center">A</div>
+            <p class="text-sm"><span class="font-semibold">ABC</span> • Phonics • Reading • Writing</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-7xl px-6 py-14">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">About Mrs. Passant</h2>
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Mrs. Passant is a dedicated English teacher specializing in Primary 1 to Primary 6. Her lessons combine phonics, vocabulary building, grammar, and fun activities to keep children motivated and confident.
+          </p>
+          <ul class="mt-6 space-y-3 text-slate-700">
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Tailored plans for each student</li>
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Interactive, game-based learning</li>
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Regular progress reports for parents</li>
+          </ul>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-white p-5 shadow">
+            <p class="text-3xl font-extrabold text-blue-700">Pri.1–2</p>
+            <p class="mt-2 text-sm text-slate-600">Phonics • Sight words • Simple sentences</p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow">
+            <p class="text-3xl font-extrabold text-blue-700">Pri.3–4</p>
+            <p class="mt-2 text-sm text-slate-600">Reading • Grammar basics • Writing</p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow">
+            <p class="text-3xl font-extrabold text-blue-700">Pri.5–6</p>
+            <p class="mt-2 text-sm text-slate-600">Comprehension • Essays • Presentations</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="bg-white border-y">
+      <div class="mx-auto max-w-7xl px-6 py-14">
+        <h2 class="text-2xl md:text-3xl font-bold">Services</h2>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="rounded-2xl border p-6 shadow-sm">
+            <h3 class="font-semibold text-lg">1:1 Tutoring</h3>
+            <p class="mt-2 text-slate-600">Customized lessons to match the learner’s pace and goals.</p>
+          </div>
+          <div class="rounded-2xl border p-6 shadow-sm">
+            <h3 class="font-semibold text-lg">Small Group Classes</h3>
+            <p class="mt-2 text-slate-600">Collaborative activities that build confidence and teamwork.</p>
+          </div>
+          <div class="rounded-2xl border p-6 shadow-sm">
+            <h3 class="font-semibold text-lg">Exam Preparation</h3>
+            <p class="mt-2 text-slate-600">Focused practice for school tests and speaking assessments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Levels -->
+    <section id="levels" class="mx-auto max-w-7xl px-6 py-14">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 shadow-xl">
+          <p class="uppercase tracking-widest text-white/80 text-xs">Chalkboard</p>
+          <h3 class="mt-2 text-2xl font-extrabold">Mrs. Passant — Teaching English</h3>
+          <p class="mt-1 text-white/90">From Pri.1 to Pri.6</p>
+          <p class="mt-3 text-white/90">Contact: 01009742002</p>
+        </div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Phonics & Pronunciation</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Vocabulary Building</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Grammar & Writing</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Reading Comprehension</li>
+          <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-600"></span> Public Speaking & Confidence</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="bg-slate-100/60">
+      <div class="mx-auto max-w-7xl px-6 py-14">
+        <h2 class="text-2xl md:text-3xl font-bold">Parent Reviews</h2>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <figure class="rounded-2xl bg-white p-6 shadow">
+            <blockquote class="text-slate-700">“My daughter’s reading improved dramatically in just two months.”</blockquote>
+            <figcaption class="mt-3 text-sm text-slate-500">— A. Hassan</figcaption>
+          </figure>
+          <figure class="rounded-2xl bg-white p-6 shadow">
+            <blockquote class="text-slate-700">“Fun and effective lessons. Highly recommended!”</blockquote>
+            <figcaption class="mt-3 text-sm text-slate-500">— M. Youssef</figcaption>
+          </figure>
+          <figure class="rounded-2xl bg-white p-6 shadow">
+            <blockquote class="text-slate-700">“Great communication and clear progress reports.”</blockquote>
+            <figcaption class="mt-3 text-sm text-slate-500">— S. Fathi</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mx-auto max-w-7xl px-6 py-14">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">Get in Touch</h2>
+          <p class="mt-3 text-slate-600">Call or send a message to book your child’s free assessment.</p>
+          <div class="mt-6 flex flex-col gap-3">
+            <a href="tel:01009742002" class="inline-flex items-center gap-3 rounded-2xl bg-blue-600 text-white px-5 py-3 w-max shadow hover:bg-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M1.5 4.5a3 3 0 013-3h1.372a2.25 2.25 0 012.12 1.474l1.036 2.76a2.25 2.25 0 01-.52 2.379L7.63 9.12a15.75 15.75 0 007.25 7.25l1.007-0.878a2.25 2.25 0 012.379-.52l2.76 1.036a2.25 2.25 0 011.474 2.12V19.5a3 3 0 01-3 3H18A16.5 16.5 0 011.5 6V4.5z"/></svg>
+              <span class="font-medium">01009742002</span>
+            </a>
+            <a href="https://wa.me/201009742002" target="_blank" class="inline-flex items-center gap-3 rounded-2xl border border-emerald-500 text-emerald-700 px-5 py-3 w-max hover:bg-emerald-50">
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+        <form class="rounded-3xl bg-white p-6 shadow space-y-4">
+          <div>
+            <label class="text-sm text-slate-600">Parent Name</label>
+            <input type="text" class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="Your name" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Phone</label>
+            <input type="tel" class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="0100…" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Child’s Level</label>
+            <select class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600">
+              <option>Pri.1</option>
+              <option>Pri.2</option>
+              <option>Pri.3</option>
+              <option>Pri.4</option>
+              <option>Pri.5</option>
+              <option>Pri.6</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Message</label>
+            <textarea rows="4" class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="Tell us about your child…"></textarea>
+          </div>
+          <button type="button" class="w-full rounded-2xl bg-blue-600 text-white px-6 py-3 shadow hover:bg-blue-700">Send</button>
+          <p class="text-xs text-slate-500">*This demo form does not send data. Connect to a backend or service (Formspree, Google Forms, etc.).</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t">
+      <div class="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-500">© <span id="year"></span> Mrs. Passant. All rights reserved.</p>
+        <p class="text-sm text-slate-500">Teaching English • Pri.1–Pri.6 • <a href="tel:01009742002" class="text-blue-700 hover:underline">01009742002</a></p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      function showAdminLink(){
+        const link = document.getElementById('adminLink');
+        if(!link) return;
+        link.classList.remove('hidden');
+        link.classList.add('text-rose-600','font-semibold');
+        link.textContent = 'Admin';
+        link.setAttribute('title','Admin (X-Admin-Key required)');
+      }
+
+      // Keyboard shortcut: Ctrl/Cmd + Shift + A
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.code === 'KeyA')) {
+          e.preventDefault();
+          showAdminLink();
+          const link = document.getElementById('adminLink');
+          if (link) link.focus();
+        }
+      });
+
+      // Secret tap on brand (5 clicks within 800ms)
+      const brand = document.getElementById('brandTap');
+      if (brand) {
+        let taps = 0, t = null;
+        brand.addEventListener('click', () => {
+          taps++;
+          clearTimeout(t);
+          t = setTimeout(()=>{ taps = 0; }, 800);
+          if (taps >= 5) { showAdminLink(); taps = 0; }
+        });
+      }
+    </script>
+
+    <!-- HOW TO CUSTOMIZE:
+      1) Replace the hero <img> src with Mrs. Passant's real photo.
+      2) Change copywriting in About/Services to your exact offering.
+      3) Hook the form to Formspree, Airtable, Google Forms or a custom backend.
+      4) Colors are Tailwind classes; tweak blue shades if desired.
+      5) To use Arabic, set dir="rtl" and translate labels; or duplicate sections in Arabic.
+    -->
+  </body>
+</html>

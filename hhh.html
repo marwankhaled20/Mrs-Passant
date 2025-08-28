@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Mrs. Passant Bookings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .badge{border-radius:9999px;padding:.25rem .6rem;font-size:.75rem}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="border-b bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl font-bold">Admin — Bookings</h1>
+      <a href="./" class="text-sm text-blue-700 hover:underline">← Back to site</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    <!-- Config -->
+    <section class="bg-white rounded-2xl shadow p-5 mb-6">
+      <div class="grid md:grid-cols-3 gap-4 items-end">
+        <div>
+          <label class="text-sm text-slate-600">API Base URL</label>
+          <input id="apiBase" class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="http://localhost:3001" />
+        </div>
+        <div>
+          <label class="text-sm text-slate-600">Admin Key (X-Admin-Key)</label>
+          <input id="adminKey" type="password" class="mt-1 w-full rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="change_this_admin_key" />
+        </div>
+        <div class="flex gap-2">
+          <button id="saveCfg" class="mt-6 w-full rounded-xl bg-slate-900 text-white px-4 py-3 hover:bg-black">Save</button>
+          <button id="loadBtn" class="mt-6 w-full rounded-xl bg-blue-600 text-white px-4 py-3 hover:bg-blue-700">Load Bookings</button>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">*Make sure your backend is running and <code>ADMIN_KEY</code> is set in <code>.env</code>.</p>
+    </section>
+
+    <!-- Tools -->
+    <section class="bg-white rounded-2xl shadow p-5 mb-6">
+      <div class="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+        <div class="flex gap-3">
+          <input id="search" class="w-64 rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600" placeholder="Search name/phone/message" />
+          <select id="filterLevel" class="rounded-xl border-slate-300 focus:border-blue-600 focus:ring-blue-600">
+            <option value="">All Levels</option>
+            <option>Pri.1</option><option>Pri.2</option><option>Pri.3</option>
+            <option>Pri.4</option><option>Pri.5</option><option>Pri.6</option>
+          </select>
+        </div>
+        <div class="flex gap-3">
+          <button id="exportCsv" class="rounded-xl border px-4 py-2 hover:bg-slate-50">Export CSV</button>
+          <span id="count" class="text-sm text-slate-500">0 rows</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="bg-white rounded-2xl shadow overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600">
+            <tr>
+              <th class="text-left px-4 py-3">ID</th>
+              <th class="text-left px-4 py-3">Created</th>
+              <th class="text-left px-4 py-3">Parent</th>
+              <th class="text-left px-4 py-3">Phone</th>
+              <th class="text-left px-4 py-3">Level</th>
+              <th class="text-left px-4 py-3">Message</th>
+              <th class="text-left px-4 py-3">IP</th>
+              <th class="text-left px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" class="divide-y">
+            <!-- rows -->
+          </tbody>
+        </table>
+      </div>
+      <div id="empty" class="hidden p-6 text-center text-slate-500">No bookings yet.</div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const apiBase = $('#apiBase');
+    const adminKey = $('#adminKey');
+    const search = $('#search');
+    const filterLevel = $('#filterLevel');
+    const tbody = $('#tbody');
+    const empty = $('#empty');
+    const count = $('#count');
+
+    const state = { rows: [], filtered: [] };
+
+    // Load/save config
+    function loadCfg(){
+      const cfg = JSON.parse(localStorage.getItem('mp_admin_cfg')||'{}');
+      apiBase.value = cfg.base || 'http://localhost:3001';
+      adminKey.value = cfg.key || '';
+    }
+    function saveCfg(){
+      localStorage.setItem('mp_admin_cfg', JSON.stringify({ base: apiBase.value, key: adminKey.value }));
+    }
+
+    // Fetch bookings
+    async function fetchBookings(){
+      const url = (apiBase.value||'').replace(/\/$/,'') + '/api/admin/bookings';
+      const res = await fetch(url, { headers: { 'X-Admin-Key': adminKey.value || '' } });
+      const json = await res.json().catch(()=>({ok:false, error:'Invalid JSON'}));
+      if(!res.ok || !json.ok){ throw new Error(json.error || res.statusText || 'Request failed'); }
+      state.rows = json.rows || [];
+      applyFilters();
+    }
+
+    // Filters
+    function applyFilters(){
+      const q = search.value.trim().toLowerCase();
+      const lvl = filterLevel.value;
+      state.filtered = state.rows.filter(r => {
+        const inLevel = !lvl || r.level === lvl;
+        const blob = `${r.parent_name||''} ${r.phone||''} ${r.message||''}`.toLowerCase();
+        const inSearch = !q || blob.includes(q);
+        return inLevel && inSearch;
+      });
+      render();
+    }
+
+    function fmt(s){ return s||''; }
+
+    function render(){
+      tbody.innerHTML = '';
+      if(!state.filtered.length){ empty.classList.remove('hidden'); count.textContent = '0 rows'; return; }
+      empty.classList.add('hidden');
+      count.textContent = state.filtered.length + ' rows';
+      for(const r of state.filtered){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-4 py-3">${r.id}</td>
+          <td class="px-4 py-3 whitespace-nowrap">${fmt(r.created_at)}</td>
+          <td class="px-4 py-3">${fmt(r.parent_name)}</td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-2">
+              <a class="text-blue-700 hover:underline" href="tel:${fmt(r.phone)}">${fmt(r.phone)}</a>
+              <button class="text-xs border rounded px-2 py-1" data-copy="${fmt(r.phone)}">Copy</button>
+            </div>
+          </td>
+          <td class="px-4 py-3"><span class="badge bg-blue-600/10 text-blue-700">${fmt(r.level)}</span></td>
+          <td class="px-4 py-3 max-w-[28rem]">${fmt(r.message)}</td>
+          <td class="px-4 py-3 text-slate-500">${fmt(r.ip)}</td>
+          <td class="px-4 py-3">
+            <a class="text-sm text-blue-700 hover:underline" href="https://wa.me/${fmt(r.phone).replace(/[^\d]/g,'')}" target="_blank">WhatsApp</a>
+          </td>`;
+        tbody.appendChild(tr);
+      }
+      tbody.querySelectorAll('button[data-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          try{ await navigator.clipboard.writeText(btn.getAttribute('data-copy')); btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',1200);}catch(e){}
+        });
+      });
+    }
+
+    function exportCSV(){
+      const rows = state.filtered;
+      if(!rows.length) return;
+      const esc = v => '"' + String(v||'').replace(/"/g,'""') + '"';
+      const header = ['id','created_at','parent_name','phone','level','message','ip'];
+      const csv = [header.join(',')].concat(rows.map(r=> header.map(h=>esc(r[h])).join(','))).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'bookings.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+
+    // Events
+    document.getElementById('saveCfg').addEventListener('click', saveCfg);
+    document.getElementById('loadBtn').addEventListener('click', async ()=>{
+      try{ await fetchBookings(); } catch(e){ alert('Error: '+ e.message); }
+    });
+    document.getElementById('exportCsv').addEventListener('click', exportCSV);
+    search.addEventListener('input', applyFilters);
+    filterLevel.addEventListener('change', applyFilters);
+<!-- في الـ nav -->
+<a id="adminLink" href="admin.html" class="hover:text-blue-700">Admin</a>
+
+    // Init
+    loadCfg();
+  </script>
+
+  <!--
+    Deployment notes:
+    - Serve this file as /admin (e.g., admin.html) in the same domain as frontend.
+    - Backend must expose GET /api/admin/bookings and set ADMIN_KEY in .env
+    - In this UI, header 'X-Admin-Key' is sent with requests.
+  -->
+</body>
+</html>
